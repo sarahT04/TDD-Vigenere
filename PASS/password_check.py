@@ -54,20 +54,20 @@ def check_chars(password: str) -> bool:
 
 def check_requirement_pass(password: str) -> bool:
     truth = [False, False, False, False]
-    for chars in sorted(set(password)):
+    for char in sorted(set(password)):
         if False not in truth:
             return True
         if truth[0] is False:
-            if check_num_in_char(chars):
+            if check_num_in_char(char):
                 truth[0] = True
         if truth[1] is False:
-            if check_spec_char(chars):
+            if check_spec_char(char):
                 truth[1] = True
         if truth[2] is False:
-            if check_upper(chars):
+            if check_upper(char):
                 truth[2] = True
         if truth[3] is False:
-            if check_ascii(chars):
+            if check_ascii(char):
                 truth[3] = True
     return True if False not in truth else False
 
