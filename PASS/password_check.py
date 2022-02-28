@@ -73,15 +73,13 @@ def check_requirement_pass(password: str) -> bool:
 
 
 def check_password(password: str) -> bool:
-    password_check_functions = [check_chars(password), check_len(password), check_requirement_pass(password)]
-    if False in password_check_functions:
-        if password_check_functions[1] is False:
-            print('Please enter a password of len above 7')
-            return False  # Len not 7
-        if password_check_functions[0] is False:
-            print('Please enter password with number less than 6 and has 4 alphabets.')
-            return False  # Alphabets < 4, num > 6
-        if password_check_functions[2] is False:
-            print('Please use at least 1 uppercase, ascii, number, and special character in your password.')
-            return False  # Requirements not met.
+    if not check_len(password):
+        print('Please enter a password of len above 7')
+        return False  # Len not 7
+    if not check_chars(password):
+        print('Please enter password with number less than 6 and has 4 alphabets.')
+        return False  # Alphabets < 4, num > 6
+    if not check_requirement_pass(password):
+        print('Please use at least 1 uppercase, ascii, number, and special character in your password.')
+        return False  # Requirements not met.
     return True
