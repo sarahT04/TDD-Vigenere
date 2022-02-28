@@ -34,12 +34,10 @@ def check_requirement_uname(password: str) -> bool:
 
 
 def check_username(password: str) -> bool:
-    password_check_functions = [check_len(password), check_requirement_uname(password)]
-    if False in password_check_functions:
-        if password_check_functions[0] is False:
-            print('Please enter username of len above 6')
-            return False  # len not 6
-        else:
-            print('Please use at least 1 uppercase, number, and not dangerous special character')
-            return False  # requirements not met
+    if not check_len(password):
+        print('Please enter username of len above 6')
+        return False  # len not 6
+    if not check_requirement_uname(password):
+        print('Please use at least 1 uppercase, number, and not dangerous special character')
+        return False  # requirements not met
     return True
