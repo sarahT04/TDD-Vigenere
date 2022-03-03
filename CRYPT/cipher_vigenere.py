@@ -49,14 +49,14 @@ def decrypt_cipher(text: str, key: str) -> str:
     :return: decrypted Vigenere text
     """
     new_text = text.upper()
-    new_key = key_repeater(len(new_text) * 3 + 1, key)
+    new_key = key_repeater(len(new_text), key)
     deciphered_text = []
     # Some additional variables
-    skipped_loop = None
+    skipped_loop = False
     real_index = 0
     for i in range(len(text)):
-        if i == skipped_loop:
-            real_index += len(key)
+        if skipped_loop:
+            skipped_loop = False
             continue
         x = (ord(new_text[i]) - ord(new_key[real_index]) + 26) % 26
         x += ord('A')
@@ -72,7 +72,7 @@ def decrypt_cipher(text: str, key: str) -> str:
                     deciphered_text.append(decrypt_num(int(text[i])))
                 elif check_num_in_char(text[i + 1]):
                     deciphered_text.append(decrypt_num(int(text[i:i + 2])))
-                    skipped_loop = i + 1
+                    skipped_loop = True
             # We are at the end of encryption, the last digit of the password yknow.
             except IndexError:
                 return ''.join(deciphered_text)
